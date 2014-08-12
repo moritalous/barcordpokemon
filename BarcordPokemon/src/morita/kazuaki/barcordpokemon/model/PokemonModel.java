@@ -5,6 +5,7 @@ public class PokemonModel {
 	private String largeImagePath;
 	private String nameImagePath;
 	private String pokemonName;
+	private String pokemonNo;
 
 	public String getLargeImagePath() {
 		return largeImagePath;
@@ -28,6 +29,14 @@ public class PokemonModel {
 
 	public void setPokemonName(String pokemonName) {
 		this.pokemonName = pokemonName;
+	}
+
+	public String getPokemonNo() {
+		return pokemonNo;
+	}
+
+	public void setPokemonNo(String pokemonNo) {
+		this.pokemonNo = pokemonNo;
 	}
 
 }

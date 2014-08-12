@@ -1,6 +1,7 @@
 package morita.kazuaki.barcordpokemon.ui;
 
 import morita.kazuaki.barcordpokemon.common.Constants;
+import morita.kazuaki.barcordpokemon.db.DbAccess;
 import morita.kazuaki.barcordpokemon.logic.PokemonNoManager;
 import morita.kazuaki.barcordpokemon.model.PokemonModel;
 import morita.kazuaki.barcordpokemon.net.HttpGetAsyncTask;
@@ -31,10 +32,19 @@ public class ResultActivity extends Activity {
 
 		int pokemon_no = PokemonNoManager.generatePokemonNo(barcordNo);
 
-		new HttpGetAsyncTask(this).execute(String.valueOf(pokemon_no));
+		DbAccess dbAccess = new DbAccess(this, false);
+		PokemonModel model = dbAccess.getpokemon(String.valueOf(pokemon_no));
+
+		if (model == null) {
+			new HttpGetAsyncTask(this).execute(String.valueOf(pokemon_no));
+			return;
+		}
+
+		updateImageWithHandler(model);
+
 	}
 
-	public void updateImage(final PokemonModel model) {
+	public void updateImageWithHandler(final PokemonModel model) {
 		final String sNameImage = model.getNameImagePath();
 		final String sLargeImage = model.getLargeImagePath();
 

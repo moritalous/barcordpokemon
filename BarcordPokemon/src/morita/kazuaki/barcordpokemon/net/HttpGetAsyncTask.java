@@ -3,6 +3,7 @@ package morita.kazuaki.barcordpokemon.net;
 import java.io.IOException;
 import java.util.Calendar;
 
+import morita.kazuaki.barcordpokemon.db.DbAccess;
 import morita.kazuaki.barcordpokemon.model.PokemonModel;
 import morita.kazuaki.barcordpokemon.ui.ResultActivity;
 import morita.kazuaki.barcordpokemon.util.FileUtils;
@@ -47,12 +48,17 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, Long> {
 			model.setLargeImagePath(FileUtils.getDownloadFile(activity, filename, DL_FILE_TYPE.LARGEIMAGE));
 			model.setNameImagePath(FileUtils.getDownloadFile(activity, filename, DL_FILE_TYPE.NAME));
 			model.setPokemonName(pokemonname);
+			model.setPokemonNo(params[0]);
+			
+			//SQLite Insert
+			DbAccess dbAccess = new DbAccess(activity, true);
+			dbAccess.insertPokemon(model);
 			
 			DownloadManager downloadManager = new DownloadManager();
 			downloadManager.get(nameImageUrl, model.getNameImagePath());
 			downloadManager.get(largeImageUrl, model.getLargeImagePath());
 			
-			activity.updateImage(model);
+			activity.updateImageWithHandler(model);
 			
 		} catch (IOException e) {
 		}
