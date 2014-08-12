@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="morita.kazuaki.barcordpokemon.ui.MainActivity" >
 
     <Button
@@ -13,5 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_scan" />
+    
+    <Button
+        android:id="@+id/btn_gotten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gotten" />
 
 </LinearLayout>

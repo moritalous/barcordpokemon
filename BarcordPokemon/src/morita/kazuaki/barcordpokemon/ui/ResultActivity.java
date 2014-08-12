@@ -4,7 +4,7 @@ import morita.kazuaki.barcordpokemon.common.Constants;
 import morita.kazuaki.barcordpokemon.logic.PokemonNoManager;
 import morita.kazuaki.barcordpokemon.model.PokemonModel;
 import morita.kazuaki.barcordpokemon.net.HttpGetAsyncTask;
-import morita.kazuaki.qrreader.R;
+import morita.kazuaki.barcordpokemon.R;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;

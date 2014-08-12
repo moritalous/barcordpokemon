@@ -1,6 +1,9 @@
 package morita.kazuaki.barcordpokemon.ui;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import morita.kazuaki.barcordpokemon.common.Constants;
 import android.app.Activity;
@@ -14,12 +17,14 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
-import com.google.zxing.MultiFormatReader;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.Reader;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.oned.MultiFormatOneDReader;
 
 public class CameraPreviewActivity extends Activity {
 
@@ -107,12 +112,13 @@ public class CameraPreviewActivity extends Activity {
 
 			// プレビューデータから BinaryBitmap を生成
 			PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(
-					data, previewWidth, previewHeight, 0, 0, previewWidth,
-					previewHeight, false);
+					data, previewWidth, previewHeight, 50, 50, previewWidth - 100,
+					previewHeight-100, false);
 			BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
 			// バーコードを読み込む
-			Reader reader = new MultiFormatReader();
+			
+			Reader reader = new MultiFormatOneDReader(getOneDFormat());
 			Result result = null;
 			try {
 				result = reader.decode(bitmap);
@@ -135,6 +141,20 @@ public class CameraPreviewActivity extends Activity {
 				}
 			} catch (Exception e) {
 			}
+		}
+
+		private Map<DecodeHintType, List<BarcodeFormat>> getOneDFormat() {
+			Map<DecodeHintType, List<BarcodeFormat>> map = new HashMap<DecodeHintType, List<BarcodeFormat>>();
+			List<BarcodeFormat> list = new ArrayList<BarcodeFormat>();
+			
+			list.add(BarcodeFormat.EAN_13);
+			list.add(BarcodeFormat.EAN_8);
+			list.add(BarcodeFormat.UPC_A);
+			list.add(BarcodeFormat.UPC_E);
+			
+			map.put(DecodeHintType.POSSIBLE_FORMATS, list);
+			
+			return map;
 		}
 	};
 }
