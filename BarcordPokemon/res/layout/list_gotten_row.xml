@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
+    <TextView
+        android:id="@+id/gotten_no_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:textSize="25dp" />
+
     <ImageView
         android:id="@+id/gotten_large_image"
         android:layout_width="0dp"

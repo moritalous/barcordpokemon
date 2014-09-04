@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class GottenArrayAdapter extends ArrayAdapter<PokemonModel> {
 
@@ -33,11 +34,14 @@ public class GottenArrayAdapter extends ArrayAdapter<PokemonModel> {
 					null);
 		}
 
+		TextView noText = (TextView) convertView
+				.findViewById(R.id.gotten_no_text);
 		ImageView nameImage = (ImageView) convertView
 				.findViewById(R.id.gotten_name_image);
 		ImageView largeImage = (ImageView) convertView
 				.findViewById(R.id.gotten_large_image);
 
+		noText.setText(String.valueOf(position));
 		nameImage.setImageURI(Uri.parse(model.getNameImagePath()));
 		largeImage.setImageURI(Uri.parse(model.getLargeImagePath()));
 
